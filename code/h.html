@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Code</title>
+
+    <link
+      href="https://cdn.jsdelivr.net/npm/daisyui@5"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  </head>
+
+  <body class="flex items-center justify-center min-h-screen bg-base-200">
+    <div class="card bg-base-100 shadow-xl p-6 w-96 text-center">
+      <p id="h" class="mb-4 font-semibold">
+        01010100 01101000 01100101 00100000 01100110 01101001 01110010 01110011
+        01110100 00100000 01110100 01101001 01101101 01100101 00100000 01110111
+        01100101 00100000 01101101 01100101 01110100
+      </p>
+
+      <label for="date" class="block mb-2">
+        When is the day we first met?
+      </label>
+
+      <input
+        type="text"
+        id="date"
+        placeholder="Enter the date..."
+        class="input input-bordered w-full mb-3"
+      />
+
+      <button class="btn btn-success w-full" onclick="submitAnswer()">
+        Submit
+      </button>
+
+      <p id="message" class="mt-4 text-sm font-medium"></p>
+    </div>
+
+    <script>
+      const correct = "March 28, 2024";
+      const input = document.getElementById("date");
+      const message = document.getElementById("message");
+      const h = document.getElementById("h");
+
+      function submitAnswer() {
+        if (input.value.trim() === correct) {
+          message.className = "mt-4 text-success font-semibold";
+          message.textContent = "Correct 💚 The first time we met.";
+
+          // Optional: hide the binary text after correct answer
+          h.style.display = "none";
+        } else {
+          message.className = "mt-4 text-error font-semibold";
+          message.textContent = "Wrong answer 😢 Try again.";
+        }
+      }
+
+      // Optional: decode the binary automatically (just for fun)
+      const binaryText = h.textContent.match(/[01]{8}/g);
+      if (binaryText) {
+        const decoded = binaryText
+          .map((bin) => String.fromCharCode(parseInt(bin, 2)))
+          .join("");
+        console.log("Decoded message:", decoded);
+      }
+    </script>
+  </body>
+</html>
